@@ -20,3 +20,13 @@ def BFS(G, start = 0):
                 q.append(u)
                 chk[u] = True
     return rtn
+
+def SO(G, hash_num = 5):
+    V = len(G)
+    fingerprints = np.zeros((V, hash_num))
+    for k in range(hash_num):
+        perm = np.random.permutation(V)
+        for v in range(V):
+            fingerprints[v][k] = perm[min(G[v], key=lambda x: perm[x])]
+    tupleprints = [tuple(f) for f in fingerprints]
+    return sorted(range(len(tupleprints)), key=tupleprints.__getitem__)

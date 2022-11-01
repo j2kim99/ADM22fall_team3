@@ -78,4 +78,4 @@ def arrange_bipartite(graph, partA, partB):
         v = B[vb]
         for ua in graph[vb]:
             G[v].append(A[ua])
-    return G, list(range(len(partA))), list(range(len(partB)))
+    return G, list(range(len(partA))), list(range(len(partA), len(partA)+len(partB)))

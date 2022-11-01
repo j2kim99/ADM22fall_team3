@@ -32,7 +32,7 @@ def count_blocks(graph, inv_perm, size):
     perm = list(range(V))
     for i in range(V):
         perm[inv_perm[i]] = i
-    B = (V+1)//size
+    B = 1+(V-1)//size
     chk = np.zeros((B, B))
     for i, l in enumerate(graph):
         v = perm[i]

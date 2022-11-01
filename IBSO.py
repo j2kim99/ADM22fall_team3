@@ -18,7 +18,7 @@ def BSO(G, permA, partB, size, hash_num=5):
     return [partB[i] for i in permB]
 
 
-def IBSO(G, partA, partB, size, hash_num=5, iter = 3):
+def IBSO(G, partA, partB, size, hash_num=5, iter = 10):
     permA = partA
     permB = partB
 

@@ -87,7 +87,6 @@ def SB(A, k=None, greedy=True):
     #1로 데이터 채우기
     data=np.ones_like(row)
     A=coo_matrix((data,(row,col)),shape=(len(row),len(col)))
-    print(A)
     n, _ = A.shape
     if k is None:
         k = max(1, int(0.001 * n))

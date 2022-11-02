@@ -90,7 +90,6 @@ def SB(A, k=None, greedy=True):
     n, _ = A.shape
     if k is None:
         k = max(1, int(0.001 * n))
-    print("Value of k:",  k)
     head = []
     tail = []
     degree = {i: 0 for i in range(n)}

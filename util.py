@@ -32,7 +32,7 @@ def count_blocks(graph, inv_perm, size):
     perm = list(range(V))
     for i in range(V):
         perm[inv_perm[i]] = i
-    B = (V+1)//size
+    B = 1+(V-1)//size
     chk = np.zeros((B, B))
     for i, l in enumerate(graph):
         v = perm[i]
@@ -64,4 +64,18 @@ def print_adjmat(graph, inv_perm, size):
             else:
                 str += '0 '
         print(str)
-        
+
+def arrange_bipartite(graph, partA, partB):
+    b0 = len(partA)
+    A = {a:i for i, a in enumerate(partA)}
+    B = {b:(i+b0) for i, b in enumerate(partB)}
+    G = [[] for _ in range(len(partA)+len(partB))]
+    for va in partA:
+        v = A[va]
+        for ub in graph[va]:
+            G[v].append(B[ub])
+    for vb in partB:
+        v = B[vb]
+        for ua in graph[vb]:
+            G[v].append(A[ua])
+    return G, list(range(len(partA))), list(range(len(partA), len(partA)+len(partB)))

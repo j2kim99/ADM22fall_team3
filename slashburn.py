@@ -158,6 +158,4 @@ def SB(A, k=None, greedy=True):
     perm = [0 for _ in range(n)]
     for i in range(n):
         perm[tops[i]] = i
-    B=reorder_matrix(A,perm)
-    print(verbose_matrix(B))
     return perm

@@ -1,5 +1,6 @@
 import numpy as np
 import random
+from scipy.sparse import coo_matrix
 
 def set_seed(seed):
     np.random.seed(seed)

@@ -4,6 +4,7 @@ from util import *
 
 from simple import *
 from IBSO import *
+from slashburn import *
 
 @click.command()
 @click.option('--data', type=str, default='minibipartite')
@@ -25,15 +26,17 @@ def main(data, method, size, dbg, showmat, seed):
         print(f'V:{V}, P1:{len(P1)}, P2:{len(P2)}, E:{E}')
 
     set_seed(seed)
-
     if method == 'degsort':
         perm = degsort(G)
     elif method == 'BFS':
         perm = BFS(G)
     elif method == 'SO' or method == 'shingle':
         perm = SO(G)
+    elif method =='SB' or method=='slashburn':
+        perm=SB(G)
     elif method == 'IBSO':
         perm = IBSO(G, P1, P2, size)
+    
     if dbg:
         # print(perm)
         print('lenperm:', len(perm))

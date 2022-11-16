@@ -26,19 +26,19 @@ def main(data, method, size, dbg, showmat, seed):
         print(f'V:{V}, P1:{len(P1)}, P2:{len(P2)}, E:{E}')
 
     set_seed(seed)
-    if method == 'degsort':
+    if method.casefold() == 'degsort'.casefold() or method.casefold() == 'deg'.casefold():
         perm = degsort(G)
-    if method == 'bideg':
+    if method.casefold() == 'bideg'.casefold():
         perm = bipartite_degsort(G, P1, P2)
-    elif method == 'BFS':
+    elif method.casefold() == 'BFS'.casefold():
         perm = BFS(G)
-    elif method == 'SO' or method == 'shingle':
+    elif method.casefold() == 'SO'.casefold() or method.casefold() == 'shingle'.casefold():
         perm = SO(G)
-    elif method == 'biSO' or method == 'bishingle':
+    elif method.casefold() == 'biSO'.casefold() or method.casefold() == 'bishingle'.casefold():
         perm = bipartite_SO(G, P1, P2)
-    elif method =='SB' or method=='slashburn':
+    elif method.casefold() =='SB'.casefold() or method.casefold()=='slashburn'.casefold():
         perm=SB(G)
-    elif method == 'IBSO':
+    elif method.casefold() == 'IBSO'.casefold():
         perm = IBSO(G, P1, P2, size)
     
     if dbg:

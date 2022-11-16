@@ -35,3 +35,18 @@ def SO(G, hash_num = 5):
             fingerprints[v][k] = perm[min(G[v], key=lambda x: perm[x])]
     tupleprints = [tuple(f) for f in fingerprints]
     return sorted(range(len(tupleprints)), key=tupleprints.__getitem__)
+
+def bipartite_degsort(G, partA, partB):
+    return sorted(partA, reverse=True, key=lambda x: len(G[x]))+\
+        sorted(partB, reverse=True, key=lambda x: len(G[x]))
+
+def bipartite_SO(G, partA, partB, hash_num=5):
+    V = len(G)
+    fingerprints = np.zeros((V, hash_num))
+    for k in range(hash_num):
+        perm = np.random.permutation(V)
+        for v in range(V):
+            fingerprints[v][k] = perm[min(G[v], key=lambda x: perm[x])]
+    tupleprints = [tuple(f) for f in fingerprints]
+    return sorted(partA, key=tupleprints.__getitem__)+\
+        sorted(partB, key=tupleprints.__getitem__)

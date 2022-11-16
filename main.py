@@ -28,10 +28,14 @@ def main(data, method, size, dbg, showmat, seed):
     set_seed(seed)
     if method == 'degsort':
         perm = degsort(G)
+    if method == 'bideg':
+        perm = bipartite_degsort(G, P1, P2)
     elif method == 'BFS':
         perm = BFS(G)
     elif method == 'SO' or method == 'shingle':
         perm = SO(G)
+    elif method == 'biSO' or method == 'bishingle':
+        perm = bipartite_SO(G, P1, P2)
     elif method =='SB' or method=='slashburn':
         perm=SB(G)
     elif method == 'IBSO':

@@ -5,7 +5,6 @@ from util import *
 from simple import *
 from IBSO import *
 from slashburn import *
-
 @click.command()
 @click.option('--data', type=str, default='minibipartite')
 @click.option('--method', type=str, default='degsort')
@@ -24,7 +23,7 @@ def main(data, method, size, dbg, showmat, seed):
 
     if dbg:
         print(f'V:{V}, P1:{len(P1)}, P2:{len(P2)}, E:{E}')
-
+    #print(G)
     set_seed(seed)
     if method.casefold() == 'degsort'.casefold() or method.casefold() == 'deg'.casefold():
         perm = degsort(G)
@@ -37,12 +36,11 @@ def main(data, method, size, dbg, showmat, seed):
     elif method.casefold() == 'biSO'.casefold() or method.casefold() == 'bishingle'.casefold():
         perm = bipartite_SO(G, P1, P2)
     elif method.casefold() =='SB'.casefold() or method.casefold()=='slashburn'.casefold():
-        perm=SB(G)
+        cooG=preprocess(V,G)
+        perm =slashburn(cooG)
     elif method.casefold() == 'IBSO'.casefold():
         perm = IBSO(G, P1, P2, size)
-    
     if dbg:
-        # print(perm)
         print('lenperm:', len(perm))
     blks = count_blocks(G, perm, size)
     print("nonzero blocks:", blks)

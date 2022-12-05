@@ -1,5 +1,6 @@
 import numpy as np
 import click
+from time import time
 from util import *
 
 from simple import *
@@ -25,6 +26,7 @@ def main(data, method, size, dbg, showmat, seed):
         print(f'V:{V}, P1:{len(P1)}, P2:{len(P2)}, E:{E}')
     #print(G)
     set_seed(seed)
+    start_time = time()
     if method.casefold() == 'degsort'.casefold() or method.casefold() == 'deg'.casefold():
         perm = degsort(G)
     if method.casefold() == 'bideg'.casefold():
@@ -40,10 +42,12 @@ def main(data, method, size, dbg, showmat, seed):
         perm =slashburn(cooG)
     elif method.casefold() == 'IBSO'.casefold():
         perm = IBSO(G, P1, P2, size)
+    elapsed_time = time()-start_time
     if dbg:
         print('lenperm:', len(perm))
     blks = count_blocks(G, perm, size)
     print("nonzero blocks:", blks)
+    print(f"elapsed time: {elapsed_time:.4f} sec")
     if showmat:
         print_adjmat(G, perm, size)
 

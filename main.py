@@ -8,7 +8,7 @@ from IBSO import *
 from slashburn import *
 @click.command()
 @click.option('--data', type=str, default='minibipartite')
-@click.option('--method', type=str, default='degsort')
+@click.option('--method', type=str, default='random')
 @click.option('--size', type=int, default=2)
 @click.option('--dbg', type=bool, default=False)
 @click.option('--showmat', type=bool, default=False)
@@ -27,9 +27,13 @@ def main(data, method, size, dbg, showmat, seed):
     #print(G)
     set_seed(seed)
     start_time = time()
-    if method.casefold() == 'degsort'.casefold() or method.casefold() == 'deg'.casefold():
+    if method.casefold() == 'random'.casefold() or method.casefold() == 'rand'.casefold():
+        perm = random_perm(G)
+    elif method.casefold() == 'bipartite_random'.casefold() or method.casefold() == 'birand'.casefold():
+        perm = bipartite_random(G, P1, P2)
+    elif method.casefold() == 'degsort'.casefold() or method.casefold() == 'deg'.casefold():
         perm = degsort(G)
-    if method.casefold() == 'bideg'.casefold():
+    elif method.casefold() == 'bideg'.casefold():
         perm = bipartite_degsort(G, P1, P2)
     elif method.casefold() == 'BFS'.casefold():
         perm = BFS(G)

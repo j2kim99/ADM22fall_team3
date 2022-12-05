@@ -50,3 +50,15 @@ def bipartite_SO(G, partA, partB, hash_num=5):
     tupleprints = [tuple(f) for f in fingerprints]
     return sorted(partA, key=tupleprints.__getitem__)+\
         sorted(partB, key=tupleprints.__getitem__)
+
+def random_perm(G):
+    V = len(G)
+    return np.random.permutation(V)
+
+def bipartite_random(G, partA, partB):
+    V1 = len(partA)
+    V2 = len(partB)
+    P1 = np.random.permutation(V1)
+    P2 = np.random.permutation(V2)+V1
+
+    return np.concatenate((P1, P2))

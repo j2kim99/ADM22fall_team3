@@ -37,11 +37,8 @@ def main(data, method, size, dbg, showmat, seed):
     elif method.casefold() =='SB'.casefold() or method.casefold()=='slashburn'.casefold():
         cooG=preprocess(V,G)
         perm =slashburn(cooG)
-
-        
     elif method.casefold() == 'IBSO'.casefold():
-        perm = IBSO(G, P1, P2, size)
-        
+        perm = IBSO(G, P1, P2, size)  
     elif method.casefold() =='fp'.casefold() or method.casefold()=='fastpi'.casefold():
         cooG=preprocess(V,G)
         perm = fastpi(cooG)

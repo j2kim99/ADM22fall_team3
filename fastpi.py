@@ -39,7 +39,7 @@ def reduce(graph, k=0.2):
     return (*top_bottom(graph), new_graph, top_largest, bottom_largest)
 
 
-def fastpi(A, P1, P2, k=0.1):
+def fastpi(A, P1, P2, k=0.001):
     print('Starting FPI...')
 
     edge_list=[]

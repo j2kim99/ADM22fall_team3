@@ -7,6 +7,7 @@ from simple import *
 from IBSO import *
 from slashburn import *
 from fastpi import *
+
 @click.command()
 @click.option('--data', type=str, default='minibipartite')
 @click.option('--method', type=str, default='random')
@@ -14,7 +15,8 @@ from fastpi import *
 @click.option('--dbg', type=bool, default=False)
 @click.option('--showmat', type=bool, default=False)
 @click.option('--seed', type=int, default=0)
-def main(data, method, size, dbg, showmat, seed):
+@click.option('--save', type=str, default='')
+def main(data, method, size, dbg, showmat, seed, save):
     path = f'data/{data}/'
     G = read_graph(path+'adjlist.txt')
     V, E, P1, P2 = read_meta(path+'metadata.txt')
@@ -58,6 +60,8 @@ def main(data, method, size, dbg, showmat, seed):
     print(f"elapsed time: {elapsed_time:.4f} sec")
     if showmat:
         print_adjmat(G, perm, size)
+    if save != '':
+        save_mat(G, perm, save)
 
 
 

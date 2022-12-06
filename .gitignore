@@ -1,6 +1,8 @@
 test.ipynb
 test.py
 try.ipynb
+*.pkl
+mat/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

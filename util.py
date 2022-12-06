@@ -2,6 +2,9 @@ import numpy as np
 import random
 from scipy.sparse import coo_matrix
 from collections import defaultdict
+from scipy.sparse import csr_matrix
+
+import pickle
 
 def set_seed(seed):
     np.random.seed(seed)
@@ -66,6 +69,29 @@ def print_adjmat(graph, inv_perm, size):
             else:
                 str += '0 '
         print(str)
+
+def save_mat(G, inv_perm, path):
+    V = len(inv_perm)
+    perm = list(range(V))
+    for i in range(V):
+        perm[inv_perm[i]] = i
+    rows = []
+    cols = []
+    vals = []
+    for i in range(V):
+        v = perm[i]
+        for j in G[i]:
+            u = perm[j]
+            rows.append(v)
+            cols.append(u)
+            vals.append(1)
+    rows = np.array(rows)
+    cosl = np.array(cols)
+    vals = np.array(vals)
+    mat = csr_matrix((vals, (rows, cols)), shape=(V, V))
+    with open(path, 'wb') as f:
+        pickle.dump(mat, f)
+
 
 def arrange_bipartite(graph, partA, partB):
     b0 = len(partA)

@@ -1,0 +1,4 @@
+click==8.0.3
+networkx==2.8.8
+numpy==1.23.4
+scipy==1.6.1

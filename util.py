@@ -171,11 +171,15 @@ def scc(nodes=[], edges=[]):
                     stack.append(j)
     return [components[leader] for leader in components]
 
-def preprocess(v,A):
-    data=np.zeros(shape=(v,v))
-    for i in range(v):
-        value=A[i]
-        for j in value:
-            data[i][j]=1
-    data=coo_matrix(data)    
+def preprocess(V,G):
+    rows = []
+    cols = []
+    vals = []
+    for v in range(V):
+        for u in G[v]:
+            rows.append(v)
+            cols.append(u)
+            vals.append(1)
+    mat = csr_matrix((vals, (rows, cols)), shape=(V, V))
+    data=coo_matrix(mat)
     return data

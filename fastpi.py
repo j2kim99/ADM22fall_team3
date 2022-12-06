@@ -4,11 +4,7 @@ from scipy.sparse import random, block_diag, diags
 from networkx.algorithms import bipartite
 import networkx as nx
 import numpy as np
-import matplotlib.pyplot as plt
 from heapq import nlargest
-plt.rcParams['figure.figsize'] = [12, 8]
-plt.rcParams['figure.dpi'] = 100
-
 
 def to_graph(A):
     return bipartite.matrix.from_biadjacency_matrix(A)
@@ -39,7 +35,7 @@ def reduce(graph, k=0.2):
     return (*top_bottom(graph), new_graph, top_largest, bottom_largest)
 
 
-def fastpi(A, P1, P2, k=0.1):
+def fastpi(A, P1, P2, k=0.001):
     print('Starting FPI...')
 
     edge_list=[]

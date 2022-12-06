@@ -38,18 +38,20 @@ def reduce(graph, k=0.2):
     # print(len(graph), len(new_graph), len(top_largest + bottom_largest))
     return (*top_bottom(graph), new_graph, top_largest, bottom_largest)
 
-# def fastpi(G, P1, P2, size, k=0.2):
-def fastpi(A, P1, P2, k=0.2):
-    print('Starting FPI...')
-    data = np.zeros(shape=(len(P1), len(P2)))
-    for i in range(len(P1)):        
-        vals = A[i]
-        for j in range(len(vals)):
-            data[i][j] =1    
-    A2 = coo_matrix(data)
-    graph = to_graph(A2)
-    top, bottom = top_bottom(graph)
 
+def fastpi(A, P1, P2, k=0.1):
+    print('Starting FPI...')
+
+    edge_list=[]
+    for i in range(len(A.row)):
+        edge_list.append((A.row[i],A.col[i]))
+    G = nx.Graph()
+    G.add_nodes_from(list(P1),bipartite=0)
+    G.add_nodes_from(list(P2),bipartite=1)
+    G.add_edges_from(edge_list)
+    graph = G
+  
+    top, bottom = top_bottom(graph)
 
     m_top = max(1, int(len(top) * k))
     m_bot = max(1, int(len(bottom) * k))
@@ -72,18 +74,10 @@ def fastpi(A, P1, P2, k=0.2):
         nb.append(len(perm_bot_lhs))
         top, bottom = top_bottom(graph)
         
+        
     perm_top = np.array(perm_top_lhs + list(top) + perm_top_rhs)
+    perm_bot = np.array(perm_bot_lhs + list(bottom) + perm_bot_rhs)
 
-    n_perm_top =[]
-    for i in perm_top:
-        n_perm_top.append(P1[i])
-
-    perm_bot = np.array(perm_bot_lhs + list(bottom) + perm_bot_rhs) - A2.shape[0]
     
-    n_perm_bot=[]
-    for i in perm_bot:
-        n_perm_bot.append(P2[i])
-    
-
-    return n_perm_top + n_perm_bot
+    return  list(perm_bot) + list(perm_top) 
 

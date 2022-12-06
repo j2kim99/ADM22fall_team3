@@ -48,8 +48,7 @@ def main(data, method, size, dbg, showmat, seed, save):
         cooG=preprocess(V,G)
         perm =slashburn(cooG)
     elif method.casefold() =='fp'.casefold() or method.casefold()=='fastpi'.casefold():
-        cooG=preprocess(V,G)
-        perm = fastpi(cooG)
+        perm = fastpi(G, P1, P2)
     elif method.casefold() == 'IBSO'.casefold():
         perm = IBSO(G, P1, P2, size)
     elapsed_time = time()-start_time

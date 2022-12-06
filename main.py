@@ -52,11 +52,14 @@ def main(data, method, size, dbg, showmat, seed, save):
     elif method.casefold() == 'IBSO'.casefold():
         perm = IBSO(G, P1, P2, size)
     elapsed_time = time()-start_time
+    
     if dbg:
         print('lenperm:', len(perm))
+
     blks = count_blocks(G, perm, size)
     print("nonzero blocks:", blks)
     print(f"elapsed time: {elapsed_time:.4f} sec")
+    
     if showmat:
         print_adjmat(G, perm, size)
     if save != '':
